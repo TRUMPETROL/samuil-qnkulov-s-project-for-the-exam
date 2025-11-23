@@ -1,0 +1,6 @@
+-get template
+-npm create vite .
+-if not done automatically write "npm i"
+-if not done automatically write "run dev"
+-clean out the default react app
+-Add template resourcess

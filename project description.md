@@ -1,0 +1,21 @@
+my delusional ideas
+
+-custom css and html made from scratch
+-my site will be about 3d modeling for games
+-it will inlude tutorials and information about different elements of the process of making a 3d model for use in a video game.
+-it will have a section with tutorials
+-a possibility to upload tutorials(registered users only)
+-the tutorials will be about stuff like topology, weightpainting, sculpting, animation etc.
+-it will include a radio in which you can select either one of several premade songs or a user uploaded one(potentially even your own) to be played while browsing the site.
+-a possibility to play user uploaded or upload music yourself will be available(registered users only)
+-a possibility to play videos
+-several presets for user made content:video+text,text+images,video+text+images.
+-user made content will be able to have different tags such as a category of the tutorial (example: subdmodeling, basics etc) category of the programs used and the type of the tutorial(exaple,video,text+images)
+-an about us section
+-contacts section
+-main community leads section(aka credits)
+- a search bar with different categories to make searching for content easier.
+-a possibility to download 3d models and music
+-a comments section for tutorials and a like system
+-a global comments section
+-
