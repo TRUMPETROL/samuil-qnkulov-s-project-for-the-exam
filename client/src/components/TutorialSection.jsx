@@ -10,6 +10,7 @@ export default function TutorialSection({ tutorials, id }) {
           description={tut.description}
           buttonText={tut.buttonText}
           onClick={tut.onClick}
+           link={tut.link}
         />
       ))}
     </section>

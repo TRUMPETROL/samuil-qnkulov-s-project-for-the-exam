@@ -3,7 +3,7 @@ export default function Footer() {
         <footer>
             <div className="Footer">
                 <p className="copyright">
-                    Copyright © 2025 MadeupCompany.inc
+                   © 2025 Game Ready. All rights reserved.
                 </p>
             </div>
         </footer>

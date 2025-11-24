@@ -10,6 +10,8 @@ body {
     background: #1d1c1c;
 }
 
+/*Registration Bar*/
+
 .registration-bar {
     position: fixed;
     top: 20px;
@@ -126,7 +128,7 @@ body {
 footer {
   color: #fdfdfd;
   background-image: linear-gradient(127deg, #0c0b0c 20%, #413e4d 91%);
-  padding: 30px;
+  padding: 20px;
   text-align: center;
 }
 
@@ -289,6 +291,20 @@ footer {
   }
 }
 
+@media (max-width: 1400px) {
+  .tutorial-selection{
+    grid-template-columns: repeat(2, 1fr);
+    max-width: calc(2 * 250px + 30px);
+  }
+}
+
+@media (max-width: 900px) {
+  .tutorial-selection {
+    grid-template-columns: 1fr;
+    max-width: 250px;
+  }
+}
+
 /* About */
 .about-section {
   background-color: #383838; /* grey box */
@@ -311,3 +327,10 @@ footer {
   font-size: 18px;
   line-height: 1.6;
 }
+
+
+
+
+
+
+
