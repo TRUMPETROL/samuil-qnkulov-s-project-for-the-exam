@@ -1,33 +1,46 @@
-import Footer from "./components/Footer.jsx";
-import IntroductionArea from "./components/IntroductionArea.jsx";
-import Sidebar from "./components/Sidebar.jsx";
-import RegistrationBar from "./components/RegistrationBar.jsx";
-import TutorialSection from "./components/TutorialSection.jsx";
-import AboutSection from "./components/AboutSection.jsx";
-
+import { Routes, Route } from "react-router-dom";
+import HomePage from "./components/HomePage.jsx";
+import TutorialsPage from "./components/TutorialPage.jsx";
 
 function App() {
- const tutorials = [
-  { image: "/images/modeling.jpg", description: "Character modeling.", buttonText: "Get Started", link: "/tutorial1.html" },
-  { image: "/images/3D-Texturing-1.jpg", description: "Textures and materials.", buttonText: "Get Started", link: "/tutorial1.html" },
-  { image: "/images/topology.jpg", description: "Proper topology and polycounts.", buttonText: "Get Started", link: "/tutorial1.html" },
-  { image: "/images/animation01.jpg", description: "Creating animations.", buttonText: "Get Started", link: "/tutorial1.html" },
-  { image: "/images/weightpaint.jpg", description: "Weight painting and skeletons.", buttonText: "Get Started", link: "/tutorial1.html" },
-];
+  const tutorials = [
+    { 
+      image: "/images/modeling.jpg", 
+      description: "Character modeling.", 
+      buttonText: "Get Started", 
+      link: "/tutorials?category=modeling" 
+    },
+    { 
+      image: "/images/3D-Texturing-1.jpg", 
+      description: "Textures and materials.", 
+      buttonText: "Get Started", 
+      link: "/tutorials?category=texturing" 
+    },
+    { 
+      image: "/images/topology.jpg", 
+      description: "Proper topology and polycounts.", 
+      buttonText: "Get Started", 
+      link: "/tutorials?category=topology" 
+    },
+    { 
+      image: "/images/animation01.jpg", 
+      description: "Creating animations.", 
+      buttonText: "Get Started", 
+      link: "/tutorials?category=animation" 
+    },
+    { 
+      image: "/images/weightpaint.jpg", 
+      description: "Weight painting and skeletons.", 
+      buttonText: "Get Started", 
+      link: "/tutorials?category=weightpaint" 
+    },
+  ];
 
   return (
-    <div className="app-container">
-      <Sidebar />
-      <RegistrationBar />
-
-      <div className="main-content">
-        <IntroductionArea />
-        <TutorialSection id="tutorials" tutorials={tutorials} />
-        <AboutSection />
-        <Footer />
-      </div>
-      
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage tutorials={tutorials} />} />
+      <Route path="/tutorials" element={<TutorialsPage />} />
+    </Routes>
   );
 }
 

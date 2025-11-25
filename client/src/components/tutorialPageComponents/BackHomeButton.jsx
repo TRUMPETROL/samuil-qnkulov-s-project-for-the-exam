@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom";
+
 export default function BackHomeButton() {
   return (
     <div className="back-home-container">
-      <a className="back-home-button" href="/index.html">
+      <Link to="/" className="back-home-button">
         Back to Home Page
-      </a>
+      </Link>
     </div>
   );
 }

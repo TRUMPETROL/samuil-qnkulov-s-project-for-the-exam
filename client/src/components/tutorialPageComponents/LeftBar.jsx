@@ -1,10 +1,12 @@
-export default function LeftBar() {
+export default function LeftBar({ selectedCategory, setSelectedCategory }) {
   return (
     <div className="tutorial-left-sidebar">
+      
       <div className="filter">
         <label>Search</label>
         <input type="text" placeholder="Type to search..." />
       </div>
+
       <div className="filter">
         <label>Platform</label>
         <select>
@@ -14,6 +16,7 @@ export default function LeftBar() {
           <option>Maya</option>
         </select>
       </div>
+
       <div className="filter">
         <label>Type</label>
         <select>
@@ -22,9 +25,13 @@ export default function LeftBar() {
           <option>Video + Text</option>
         </select>
       </div>
-       <div className="filter">
+
+      <div className="filter">
         <label>Category</label>
-        <select>
+        <select 
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)} 
+        >
           <option>All</option>
           <option>Modeling</option>
           <option>Textures/Materials</option>
@@ -33,6 +40,7 @@ export default function LeftBar() {
           <option>Weight paint/Skeletons</option>
         </select>
       </div>
+
     </div>
   );
 }

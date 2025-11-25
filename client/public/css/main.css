@@ -12,11 +12,11 @@ body {
 
 /*Registration Bar*/
 
-.registration-bar {
-    position: fixed;
+.reg-home .registration-bar {
+      position: fixed;
     top: 20px;
-    left: calc(50% + 35px); 
-    transform: translateX(-50%);
+    left: 54.3%; 
+    transform: translateX(-50%); 
     z-index: 2000;
     background: rgba(30, 30, 30, 0.85);
     backdrop-filter: blur(10px);
@@ -26,7 +26,7 @@ body {
     transition: left 0.3s ease, background 0.3s ease;
 }
 
-.sidebar:hover ~ .registration-bar {
+.sidebar:hover ~ .reg-home .registration-bar {
     left: calc(50% + 120px); 
 }
 
@@ -221,18 +221,18 @@ footer {
 /* Tutorial Section */
 .tutorial-section {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
-  justify-content: center;               
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
   gap: 30px;
   padding: 40px 20px;
-  max-width: calc(3 * 250px + 2 * 30px); 
-  margin: 0 auto;                        
+  max-width: calc(3 * 400px + 2 * 30px); /* updated for 400px width boxes */
+  margin: 0 auto;
 }
 
 .tutorial-box {
   background-color: #2a292a;
   border-radius: 25px;
-  width: 400px;          
+  width: 400px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -244,24 +244,25 @@ footer {
   transform: translateY(-5px);
 }
 
-.tutorial-box-image img {
+
+.tutorial-image {
   width: 100%;
-  height: 200px; 
+  height: 200px;
   object-fit: cover;
 }
 
-.tutorial-box-description {
-  flex: 1;               
+.tutorial-description {
+  flex: 1;
   padding: 20px;
   color: #fff;
   font-size: 25px;
   text-align: center;
 }
 
-.tutorial-box-button {
-  margin: 15px;
-  padding: 12px 25px;
-  border-radius: 20px;
+.tutorial-button {
+  margin: 15px auto; 
+  padding: 15px 30px;
+  border-radius: 25px;
   border: none;
   background-color: #470e0e;
   color: #fff;
@@ -269,11 +270,16 @@ footer {
   font-size: 20px;
   cursor: pointer;
   transition: 0.3s;
+  display: block; 
 }
 
-.tutorial-box-button:hover {
+.tutorial-button:hover {
   background-color: #ac3535;
   transform: translateY(-2px);
+}
+
+.tutorial-link {
+  text-decoration: none;
 }
 
 /* Responsive */

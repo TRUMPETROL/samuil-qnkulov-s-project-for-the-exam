@@ -1,21 +1,17 @@
-export default function TutorialSectionBox({ image, description, buttonText, onClick, link }) {
-  const handleClick = () => {
-    if (link) {
-      window.location.href = link; // navigate to the new page
-    } else if (onClick) {
-      onClick();
-    }
-  };
+import { Link } from "react-router-dom";
 
+export default function TutorialSectionBox({ image, description, buttonText, link }) {
   return (
     <div className="tutorial-box">
-      <div className="tutorial-box-image">
-        <img src={image} alt="tutorial" />
-      </div>
-      <div className="tutorial-box-description">{description}</div>
-      <button className="tutorial-box-button" onClick={handleClick}>
-        {buttonText}
-      </button>
+      <img src={image} alt={description} className="tutorial-image" />
+      <p className="tutorial-description">{description}</p>
+      {link ? (
+        <Link to={link} className="tutorial-link">
+          <button className="tutorial-button">{buttonText}</button>
+        </Link>
+      ) : (
+        <button className="tutorial-button">{buttonText}</button>
+      )}
     </div>
   );
 }
