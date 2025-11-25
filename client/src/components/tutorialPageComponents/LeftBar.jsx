@@ -22,6 +22,17 @@ export default function LeftBar() {
           <option>Video + Text</option>
         </select>
       </div>
+       <div className="filter">
+        <label>Category</label>
+        <select>
+          <option>All</option>
+          <option>Modeling</option>
+          <option>Textures/Materials</option>
+          <option>Topology/Polycount</option>
+          <option>Animating</option>
+          <option>Weight paint/Skeletons</option>
+        </select>
+      </div>
     </div>
   );
 }
