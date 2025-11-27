@@ -11,7 +11,7 @@ import "/public/css/tutorials.css"
 export default function TutorialsPage() {
     const location = useLocation();
     const [selectedCategory, setSelectedCategory] = useState("All");
-
+    const [selectedPlatform, setSelectedPlatform] = useState("All");
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const category = params.get("category");
@@ -41,8 +41,12 @@ export default function TutorialsPage() {
                 <LeftBar
                     selectedCategory={selectedCategory}
                     setSelectedCategory={setSelectedCategory}
+                    selectedPlatform={selectedPlatform}
+                    setSelectedPlatform={setSelectedPlatform}
                 />
-                <TutorialBrowser />
+                <TutorialBrowser
+                    selectedCategory={selectedCategory}
+                    selectedPlatform={selectedPlatform} />
                 <RightBar />
             </div>
 

@@ -1,0 +1,137 @@
+.auth-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+
+.auth-box {
+    background-color: #222121;
+    border-radius: 20px;
+    padding: 40px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff
+}
+
+.auth-box h1 {
+    margin-bottom: 25px;
+    font-size: 28px;
+    text-align: center;
+}
+
+
+.auth-box input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid #3b3b3b;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: #555;
+    color: #fff;
+}
+
+
+.auth-box p {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    text-align: center;
+    font-size: 25px;
+}
+
+
+.auth-box a {
+    font-weight: bold;
+    color: #912525;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.auth-box a:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+.auth-box .back-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #470e0e;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.auth-box .back-btn:hover {
+    background-color: #ac3535;
+}
+
+.auth-box input::placeholder {
+    color: #ccc;
+}
+
+.auth-box .confirm-btn {
+    margin-bottom: 10px;
+    padding: 10px 100px;
+    border: none;
+    border-radius: 10px;
+    background-color: #470e0e;
+    color: #fff;
+    font-size: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.auth-box .confirm-btn:hover {
+    background-color: #ac3535;
+}
+
+.auth-box .yes-btn:hover {
+    background-color: #ac3535;
+}
+
+.auth-box .no-btn:hover {
+    background-color: #ac3535;
+}
+
+.auth-box .yes-no-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.auth-box .yes-btn,
+.auth-box .no-btn {
+    padding: 10px 50px;
+    border: none;
+    border-radius: 10px;
+    background-color: #470e0e;
+    color: #fff;
+    font-size: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 0;
+    line-height: 1;
+    height: 60px;
+}

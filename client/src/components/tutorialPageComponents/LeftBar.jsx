@@ -1,4 +1,5 @@
-export default function LeftBar({ selectedCategory, setSelectedCategory }) {
+export default function LeftBar({ selectedCategory, setSelectedCategory,  selectedPlatform,
+  setSelectedPlatform }) {
   return (
     <div className="tutorial-left-sidebar">
       
@@ -7,24 +8,22 @@ export default function LeftBar({ selectedCategory, setSelectedCategory }) {
         <input type="text" placeholder="Type to search..." />
       </div>
 
+      
       <div className="filter">
         <label>Platform</label>
-        <select>
+        <select 
+          value={selectedPlatform}
+          onChange={(e) => setSelectedPlatform(e.target.value)}
+        >
           <option>All</option>
           <option>Blender</option>
           <option>Zbrush</option>
           <option>Maya</option>
+          <option>Substance Painter</option>
         </select>
       </div>
 
-      <div className="filter">
-        <label>Type</label>
-        <select>
-          <option>All</option>
-          <option>Image + Text</option>
-          <option>Video + Text</option>
-        </select>
-      </div>
+     
 
       <div className="filter">
         <label>Category</label>

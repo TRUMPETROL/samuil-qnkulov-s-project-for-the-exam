@@ -1,12 +1,13 @@
+import { Link } from "react-router-dom";
+
 export default function RegistrationBar() {
   return (
     <div className="registration-bar">
       <div className="registration-inner">
-        <a href="#" className="registration-item">Register</a>
-        <a href="#" className="registration-item">Login</a>
-          <a href="#" className="registration-item">Logout</a>
-        <a href="#" className="registration-item">Profile</a>
-        
+        <Link className="registration-item" to="/register">Register</Link>
+        <Link className="registration-item" to="/login">Login</Link>
+        <Link className="registration-item" to="/logout">Logout</Link>
+        <Link className="registration-item" to="#">Profile</Link>
       </div>
     </div>
   );

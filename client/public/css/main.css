@@ -225,7 +225,7 @@ footer {
   justify-content: center;
   gap: 30px;
   padding: 40px 20px;
-  max-width: calc(3 * 400px + 2 * 30px); /* updated for 400px width boxes */
+  max-width: calc(3 * 400px + 2 * 30px); 
   margin: 0 auto;
 }
 
@@ -297,27 +297,14 @@ footer {
   }
 }
 
-@media (max-width: 1400px) {
-  .tutorial-selection{
-    grid-template-columns: repeat(2, 1fr);
-    max-width: calc(2 * 250px + 30px);
-  }
-}
-
-@media (max-width: 900px) {
-  .tutorial-selection {
-    grid-template-columns: 1fr;
-    max-width: 250px;
-  }
-}
 
 /* About */
 .about-section {
-  background-color: #383838; /* grey box */
+  background-color: #383838; 
   color: #ffffff;
   border-radius: 25px;
   padding: 40px 30px;
-  margin: 40px auto; /* space between sections and center it */
+  margin: 40px auto; 
   max-width: 800px;
   text-align: center;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);

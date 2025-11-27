@@ -1,6 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./components/HomePage.jsx";
 import TutorialsPage from "./components/TutorialPage.jsx";
+import RegisterPage from "./components/RegisterPage.jsx";
+import LoginPage from "./components/LoginPage.jsx";
+import LogoutPage from "./components/LogoutConfirmPage.jsx";
 
 function App() {
   const tutorials = [
@@ -40,6 +43,9 @@ function App() {
     <Routes>
       <Route path="/" element={<HomePage tutorials={tutorials} />} />
       <Route path="/tutorials" element={<TutorialsPage />} />
+       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/logout" element={<LogoutPage />} />
     </Routes>
   );
 }
