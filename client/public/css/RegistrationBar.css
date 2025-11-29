@@ -1,0 +1,6 @@
+.registration-item.disabled {
+    pointer-events: none; 
+    color: grey; 
+    cursor: default;
+    opacity: 0.6; 
+}

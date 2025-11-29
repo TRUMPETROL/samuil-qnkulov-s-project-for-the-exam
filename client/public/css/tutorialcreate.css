@@ -1,0 +1,169 @@
+/* Container */
+.tutorial-creation-page__container {
+  display: flex;
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #1d1c1c;
+  color: #fff;
+}
+
+/* Main area */
+.tutorial-creation-page__main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+/* Scrollable content */
+.tutorial-creation-page__scrollable {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px; 
+}
+
+/* Content placeholder */
+.tutorial-creation-page__content {
+  background-color: #2b2b2b;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow:
+    inset 0 8px 18px rgba(0, 0, 0, 0.7),
+    inset 0 -8px 18px rgba(60, 60, 60, 0.4),
+    inset 8px 0 18px rgba(0, 0, 0, 0.5),
+    inset -8px 0 18px rgba(80, 80, 80, 0.4);
+}
+
+/* Back button */
+.tutorial-creation-page__back-btn {
+  background-color: #470e0e;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+.tutorial-creation-page__back-btn:hover {
+  background-color: #ac3535;
+  transform: translateY(-2px);
+}
+
+/* Inputs and textareas */
+.tutorial-creation-page__title-input,
+.tutorial-creation-page__description-input,
+.tutorial-creation-page__step-title,
+.tutorial-creation-page__step-content {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: none;
+  background-color: #3a383a;
+  color: #fff;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.tutorial-creation-page__description-input,
+.tutorial-creation-page__step-content {
+  min-height: 60px;
+  resize: vertical;
+}
+
+/* Steps */
+.tutorial-creation-page__step {
+  background-color: #2a292a;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Step image preview */
+.tutorial-creation-page__step-preview {
+  margin-top: 10px;
+  max-width: 100%;
+  max-height: 200px;
+  display: block;
+  border-radius: 15px;
+  border: 1px solid #3a383a;
+  object-fit: contain;
+}
+
+/* Add step button */
+.tutorial-creation-page__add-step-btn {
+  background-color: #470e0e;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+.tutorial-creation-page__add-step-btn:hover {
+  background-color: #ac3535;
+  transform: translateY(-2px);
+}
+
+/* Right sidebar */
+.tutorial-creation-page__sidebar {
+width: 24%;
+  background: #2a292a;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: calc(100vh - 40px);
+  position: sticky;
+  top: 0.1px;
+}
+
+/* Instructions */
+.tutorial-creation-page__instructions h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.tutorial-creation-page__instructions ol {
+  padding-left: 20px;
+  color: #fff;
+}
+
+.tutorial-creation-page__instructions li {
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+/* Publish button */
+.tutorial-creation-page__publish-btn {
+  background-color: #470e0e;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 25px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+.tutorial-creation-page__publish-btn:hover {
+  background-color: #ac3535;
+  transform: translateY(-2px);
+}
+
