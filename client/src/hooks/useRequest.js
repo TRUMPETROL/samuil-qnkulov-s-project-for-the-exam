@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, useCallback } from "react";
 import UserContext from "/src/contexts/UserContext";
 
 const baseUrl = 'http://localhost:3030';
@@ -7,8 +7,7 @@ export default function useRequest(url, initialState) {
     const { user, isAuthenticated } = useContext(UserContext);
     const [data, setData] = useState(initialState);
 
-    // TODO Fix infinite loop problem on mount request with useEffect
-    const request = async (url, method, data, config = {}) => {
+    const request = useCallback(async (url, method, data, config = {}) => {
         let options = {};
 
         if (method) {
@@ -39,7 +38,6 @@ export default function useRequest(url, initialState) {
         }
 
         if (!response.ok) {
-           
             throw new Error(result?.message || response.statusText || 'Request failed');
         }
 
@@ -48,7 +46,7 @@ export default function useRequest(url, initialState) {
         }
 
         return result;
-    };
+    }, [isAuthenticated, user?.accessToken]); 
 
     useEffect(() => {
         if (!url) return;
@@ -56,7 +54,7 @@ export default function useRequest(url, initialState) {
         request(url)
             .then(result => setData(result))
             .catch(err => alert(err.message)); 
-    }, [url]);
+    }, [url, request]); 
 
     return {
         request,

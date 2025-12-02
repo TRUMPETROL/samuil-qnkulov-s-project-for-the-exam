@@ -7,6 +7,7 @@ import LogoutPage from "./components/LogoutConfirmPage.jsx";
 import TutorialCreationPage from "./components/tutorialPageComponents/TutorialCreationPage.jsx";
 import { useContext, useState } from "react";
 import UserContext from "/src/contexts/UserContext.jsx";
+import ProfilePage from "./components/ProfilePage.jsx";
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/logout" element={<LogoutPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/tutorials/create" element={<TutorialCreationPage />} />
       </Routes>
     

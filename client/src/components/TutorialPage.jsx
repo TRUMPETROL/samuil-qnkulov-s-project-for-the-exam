@@ -12,12 +12,15 @@ export default function TutorialsPage() {
     const location = useLocation();
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [selectedPlatform, setSelectedPlatform] = useState("All");
+    
+   
+    const [searchTerm, setSearchTerm] = useState("");
+
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const category = params.get("category");
 
         if (category) {
-
             const formatted = {
                 modeling: "Modeling",
                 texturing: "Textures/Materials",
@@ -43,10 +46,14 @@ export default function TutorialsPage() {
                     setSelectedCategory={setSelectedCategory}
                     selectedPlatform={selectedPlatform}
                     setSelectedPlatform={setSelectedPlatform}
+                    searchTerm={searchTerm}           
+                    setSearchTerm={setSearchTerm}     
                 />
                 <TutorialBrowser
                     selectedCategory={selectedCategory}
-                    selectedPlatform={selectedPlatform} />
+                    selectedPlatform={selectedPlatform}
+                    searchTerm={searchTerm}          
+                />
                 <RightBar />
             </div>
 

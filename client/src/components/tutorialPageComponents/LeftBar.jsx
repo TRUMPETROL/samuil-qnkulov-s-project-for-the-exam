@@ -1,11 +1,16 @@
 export default function LeftBar({ selectedCategory, setSelectedCategory,  selectedPlatform,
-  setSelectedPlatform }) {
+  setSelectedPlatform, searchTerm, setSearchTerm }) {
   return (
     <div className="tutorial-left-sidebar">
       
-      <div className="filter">
+        <div className="filter">
         <label>Search</label>
-        <input type="text" placeholder="Type to search..." />
+        <input
+          type="text"
+          placeholder="Type to search..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       </div>
 
       

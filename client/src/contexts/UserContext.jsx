@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import useRequest from "/src/hooks/useRequest";
 
 const UserContext = createContext({
@@ -15,32 +15,60 @@ const UserContext = createContext({
     logoutHandler() { },
 });
 
-export function UserProvider({
-    children,
-}) {
-    const [user, setUser] = useState(null);
+
+
+export function UserProvider({ children }) {
+ 
+    const [user, setUser] = useState(() => {
+        const storedUser = localStorage.getItem("user");
+        return storedUser ? JSON.parse(storedUser) : null;
+    });
+
     const { request } = useRequest();
+
+    useEffect(() => {
+        if (user) {
+            localStorage.setItem("user", JSON.stringify(user));
+        } else {
+            localStorage.removeItem("user");
+        }
+    }, [user]);
+
+
+    
+useEffect(() => {
+    async function validateSession() {
+        if (!user?.accessToken) return;
+
+        try {
+           
+            await request('/users/me', 'GET', null, { accessToken: user.accessToken });
+        } catch (err) {
+            console.log("Session expired — logging out.");
+            setUser(null);       
+            localStorage.removeItem("user"); 
+        }
+    }
+
+    validateSession();
+}, []);  
+
+
 
     const registerHandler = async (email, password) => {
         const newUser = { email, password };
-
-    
         const result = await request('/users/register', 'POST', newUser);
-
-        setUser(result);
+        setUser(result);      
     };
 
     const loginHandler = async (email, password) => {
         const result = await request('/users/login', 'POST', { email, password });
-
-        console.log(result);
-
-        setUser(result);
+        setUser(result);      
     };
 
     const logoutHandler = () => {
-        return request('/users/logout', 'GET', null, { accessToken: user.accessToken })
-            .finally(() => setUser(null));
+        return request('/users/logout', 'GET', null, { accessToken: user?.accessToken })
+            .finally(() => setUser(null)); 
     };
 
     const userContextValues = {
@@ -59,9 +87,7 @@ export function UserProvider({
 }
 
 export function useUserContext() {
-    const contextData = useContext(UserContext);
-
-    return contextData;
+    return useContext(UserContext);
 }
 
 export default UserContext;

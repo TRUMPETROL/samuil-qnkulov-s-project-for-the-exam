@@ -1,6 +1,6 @@
 import Tutorial from "./tutorial.jsx";
 
-export default function TutorialBrowser({ selectedCategory, selectedPlatform }) {
+export default function TutorialBrowser({ selectedCategory, selectedPlatform, searchTerm }) {
 
   const tutorials = [
     {
@@ -53,11 +53,12 @@ export default function TutorialBrowser({ selectedCategory, selectedPlatform }) 
     },
   ];
 
- const filtered = tutorials.filter(t =>
-    (selectedCategory === "All" || t.category === selectedCategory) &&
-    (selectedPlatform === "All" || t.platform === selectedPlatform)
-  );
 
+  const filtered = tutorials.filter(t =>
+    (selectedCategory === "All" || t.category === selectedCategory) &&
+    (selectedPlatform === "All" || t.platform === selectedPlatform) &&
+    t.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="tutorial-main-menu">
@@ -66,8 +67,6 @@ export default function TutorialBrowser({ selectedCategory, selectedPlatform }) 
           <Tutorial
             key={index}
             {...tut}
-            //remember tha i also use the username for the unique url 
-            //this means that when creating a user i should check if the name is a duplicate and not allow it if it is
             link={`/tutorial/${tut.creator.toLowerCase()}-${tut.title.replace(/\s+/g, "-").toLowerCase()}`}
           />
         ))}
