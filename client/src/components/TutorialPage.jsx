@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import RegistrationBar from "./RegistrationBar.jsx";
 import BackHomeButton from "./tutorialPageComponents/BackHomeButton.jsx";
 import LeftBar from "./tutorialPageComponents/LeftBar.jsx";
-import TutorialBrowser from "./tutorialPageComponents/TutorialSelection.jsx";
 import RightBar from "./tutorialPageComponents/RightBar.jsx";
 import TutorialFooter from "./tutorialPageComponents/TutorialPFooter.jsx";
 import "/public/css/tutorials.css"
+import TutorialSelection from "./tutorialPageComponents/TutorialSelection.jsx";
 
 export default function TutorialsPage() {
     const location = useLocation();
@@ -49,7 +49,7 @@ export default function TutorialsPage() {
                     searchTerm={searchTerm}           
                     setSearchTerm={setSearchTerm}     
                 />
-                <TutorialBrowser
+                <TutorialSelection
                     selectedCategory={selectedCategory}
                     selectedPlatform={selectedPlatform}
                     searchTerm={searchTerm}          

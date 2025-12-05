@@ -8,6 +8,9 @@ import TutorialCreationPage from "./components/tutorialPageComponents/TutorialCr
 import { useContext, useState } from "react";
 import UserContext from "/src/contexts/UserContext.jsx";
 import ProfilePage from "./components/ProfilePage.jsx";
+import PrivateRoute from "./PrivateRoute.jsx";
+import TutorialView from "./components/TutorialView.jsx";
+
 
 
 function App() {
@@ -49,16 +52,41 @@ function App() {
   return (
    
       <Routes>
+
         <Route path="/" element={<HomePage tutorials={tutorials} />} />
         <Route path="/tutorials" element={<TutorialsPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/logout" element={<LogoutPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/tutorials/create" element={<TutorialCreationPage />} />
-      </Routes>
-    
+        <Route path="/tutorial/:id" element={<TutorialView />} />
+        
+
+      <Route
+        path="/logout"
+        element={
+          <PrivateRoute>
+            <LogoutPage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <PrivateRoute>
+            <ProfilePage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/tutorials/create"
+        element={
+          <PrivateRoute>
+            <TutorialCreationPage />
+          </PrivateRoute>
+        }
+      />
+    </Routes>
   );
 }
+
 
 export default App;

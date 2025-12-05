@@ -3,6 +3,44 @@ import { useNavigate } from "react-router-dom";
 import "/public/css/tutorialcreate.css";
 import UserContext from "../../contexts/UserContext";
 
+//shamelessly stolen code that compresses images so that they take up less space 
+
+async function compressImage(file, maxWidth = 800, maxHeight = 600, quality = 0.6) {
+    return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onload = (event) => {
+            const img = new Image();
+            img.src = event.target.result;
+
+            img.onload = () => {
+                let { width, height } = img;
+
+               
+                if (width > maxWidth) {
+                    height *= maxWidth / width;
+                    width = maxWidth;
+                }
+                if (height > maxHeight) {
+                    width *= maxHeight / height;
+                    height = maxHeight;
+                }
+
+                const canvas = document.createElement("canvas");
+                canvas.width = width;
+                canvas.height = height;
+
+                const ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0, width, height);
+
+                const compressed = canvas.toDataURL("image/jpeg", quality);
+                resolve(compressed);
+            };
+        };
+    });
+}
+
 
 
 export default function TutorialCreationPage() {
@@ -12,7 +50,7 @@ export default function TutorialCreationPage() {
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("Modeling");
     const [platform, setPlatform] = useState("Blender");
-    const [coverImage, setCoverImage] = useState(null); 
+    const [coverImage, setCoverImage] = useState(null);
     const [steps, setSteps] = useState([{ title: "", description: "", image: null }]);
 
 
@@ -38,10 +76,11 @@ export default function TutorialCreationPage() {
         }
 
         const newTutorial = {
+            id: Date.now(),
             title,
             category,
             platform,
-            coverImage, 
+            coverImage,
             steps,
             creator: user?.email || "unidentified user?",
             date: new Date().toISOString()
@@ -78,12 +117,11 @@ export default function TutorialCreationPage() {
                         <input
                             type="file"
                             accept="image/*"
-                            onChange={(e) => {
+                            onChange={async (e) => {
                                 const file = e.target.files[0];
                                 if (!file) return;
-                                const reader = new FileReader();
-                                reader.onloadend = () => setCoverImage(reader.result);
-                                reader.readAsDataURL(file); 
+                                const compressed = await compressImage(file);
+                                setCoverImage(compressed);
                             }}
                         />
 
@@ -114,12 +152,19 @@ export default function TutorialCreationPage() {
                                     value={step.title}
                                     onChange={(e) => updateStep(index, "title", e.target.value)}
                                 />
-                                <input
+
+                               <input
                                     type="file"
                                     accept="image/*"
                                     className="tutorial-creation-page__step-image"
-                                    onChange={(e) => updateStep(index, "image", e.target.files[0])}
+                                    onChange={async (e) => {
+                                        const file = e.target.files[0];
+                                        if (!file) return;
+                                        const compressed = await compressImage(file);
+                                        updateStep(index, "image", compressed);
+                                    }}
                                 />
+
                                 <textarea
                                     placeholder={`Step ${index + 1} Description`}
                                     className="tutorial-creation-page__step-content"
@@ -145,6 +190,10 @@ export default function TutorialCreationPage() {
                         <li>Select category and platform.</li>
                         <li>Add steps and optional images.</li>
                         <li>Press Publish to save.</li>
+                        <li>As of now,
+                            because everything is saved on the local storage,
+                            you cant upload too many tutorials.</li>
+
                     </ol>
                 </div>
 

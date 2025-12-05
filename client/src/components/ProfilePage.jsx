@@ -27,8 +27,8 @@ export default function ProfilePage() {
                     <p><strong>Created On:</strong> {new Date(user._createdOn).toLocaleString()}</p>
                 </div>
 
-                <button className="back-btn" onClick={() => navigate("/")}>
-                    Back to Home
+                <button className="back-btn" onClick={() => navigate(-1)}>
+                    Go Back
                 </button>
             </div>
         </div>

@@ -1,0 +1,101 @@
+/* TutorialView */
+.tutorial-view {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.tutorial-view p {
+  margin: 5px 0;
+  font-size: 0.95rem;
+  color: #ccc;
+}
+
+.tutorial-cover {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.tutorial-cover img {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+/*Steps inside the tutorial*/
+.tutorial-step {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #2a2a2a;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  text-align: center;  
+}
+
+.tutorial-step h3 {
+  margin-bottom: 10px;
+  color: #ffa500;
+}
+
+.tutorial-step p {
+  color: #ddd;
+  line-height: 1.5;
+}
+
+.tutorial-step img {
+  max-width: 80%;
+   margin-bottom: 30px;
+  margin-top: 30px;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+}
+
+
+/*Get out button*/
+.tutorial-view button {
+  margin-top: 30px;
+  background-color: #470e0e; 
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s all;
+}
+
+.tutorial-view button:hover {
+  background-color: #ac3535; 
+  transform: translateY(-2px);
+}
+
+
+
+
+.tutorial-view h1 {
+  font-size: 50px;
+  margin-bottom: 10px;
+  color: #ffd700;
+  text-align: center;
+}
+
+.tutorial-view .tutorial-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  gap: 5px;
+  margin-bottom: 20px;
+  color: #ccc;
+  font-size: 24px;
+}
+
+.tutorial-view .tutorial-meta span {
+  color: #fff;
+}
