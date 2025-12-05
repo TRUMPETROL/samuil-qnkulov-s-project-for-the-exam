@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import useRequest from "/src/hooks/useRequest";
 
+
 const UserContext = createContext({
     isAuthenticated: false,
     user: {
