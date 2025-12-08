@@ -59,7 +59,7 @@
 
 /*Get out button*/
 .tutorial-view button {
-  margin-top: 30px;
+  margin-top: 10px;
   background-color: #470e0e; 
   color: #fff;
   border: none;
@@ -75,7 +75,6 @@
   background-color: #ac3535; 
   transform: translateY(-2px);
 }
-
 
 
 
@@ -99,3 +98,11 @@
 .tutorial-view .tutorial-meta span {
   color: #fff;
 }
+
+
+.delete-btn {
+     margin-left: 10px;
+}
+
+
+

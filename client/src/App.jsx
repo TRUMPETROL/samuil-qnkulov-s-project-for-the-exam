@@ -10,6 +10,7 @@ import UserContext from "/src/contexts/UserContext.jsx";
 import ProfilePage from "./components/ProfilePage.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
 import TutorialView from "./components/TutorialView.jsx";
+import TutorialEditPage from "./components/tutorialPageComponents/TutorialEditPage.jsx";
 
 
 
@@ -50,15 +51,26 @@ function App() {
   ];
 
   return (
-   
-      <Routes>
 
-        <Route path="/" element={<HomePage tutorials={tutorials} />} />
-        <Route path="/tutorials" element={<TutorialsPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/tutorial/:id" element={<TutorialView />} />
-        
+    <Routes>
+
+      <Route path="/" element={<HomePage tutorials={tutorials} />} />
+      <Route path="/tutorials" element={<TutorialsPage />} />
+      <Route path="/tutorial/:id" element={<TutorialView />} />
+
+      <Route
+        path="/register"
+        element={
+          user?.email ? <Navigate to="/tutorials" replace /> : <RegisterPage />
+        }
+      />
+      <Route
+        path="/login"
+        element={
+          user?.email ? <Navigate to="/tutorials" replace /> : <LoginPage />
+        }
+      />
+
 
       <Route
         path="/logout"
@@ -84,6 +96,16 @@ function App() {
           </PrivateRoute>
         }
       />
+
+      <Route
+        path="/tutorials/edit/:id"
+        element={
+          <PrivateRoute>
+            <TutorialEditPage />
+          </PrivateRoute>
+        }
+      />
+
     </Routes>
   );
 }
