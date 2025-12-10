@@ -19,7 +19,10 @@ const UserContext = createContext({
 
 
 export function UserProvider({ children }) {
+
+//the user is also stored in local storage to keep him after refresh
  
+//adds the current user to local storage
     const [user, setUser] = useState(() => {
         const storedUser = localStorage.getItem("user");
         return storedUser ? JSON.parse(storedUser) : null;
@@ -27,6 +30,7 @@ export function UserProvider({ children }) {
 
     const { request } = useRequest();
 
+    //if loged in save the user if not remove them
     useEffect(() => {
         if (user) {
             localStorage.setItem("user", JSON.stringify(user));
@@ -36,7 +40,7 @@ export function UserProvider({ children }) {
     }, [user]);
 
 
-    
+    //checks if the user token is valid if not the users no longer exists in the server so he gets removed from the local storage 
 useEffect(() => {
     async function validateSession() {
         if (!user?.accessToken) return;

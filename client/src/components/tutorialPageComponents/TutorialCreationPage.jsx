@@ -56,6 +56,8 @@ export default function TutorialCreationPage() {
 
     //add a step object
     const addStep = () => setSteps(prev => [...prev, { title: "", description: "", image: null }]);
+
+    //update the step object
     const updateStep = (index, field, value) => {
         setSteps(prev => {
             const updated = [...prev];

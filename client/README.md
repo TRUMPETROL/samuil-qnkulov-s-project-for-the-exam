@@ -1,45 +1,29 @@
+-this single page app allows user to view or create tutorials 
 
 
--left to do
+-it contains a home page acessable to all users
+-in the home page the users can register, read about the app's purpuse and go to the TutorialsPage 
 
--add actual functional user registration
 
--add the profile page and fill it with data from the currently registered user
+-in the tutorial page the user even if unregistered can choose different tutorials that are uploaded by other user on several categories(controled with search filters) 
+-in case the user is still not registered from the home page they can do it directly in the tutorial page as well.
 
--make it so that the logout and profile functions are greyed out for unregisterd users
 
--make the register and login option greyed out for registered users
--the user will have an email,username,password,tutorials uploaded
+-the registered users get acess to new features like the ability to upload tutorials, a profile page that displays their profile information and the option to edit or delete tutorials they have created.
 
--add a page for actually making tutorilas that is only available to registered users
--the button for creating them will apear at the right sidebar for regitered user only
--it should have the ability to add video and images and no character limit
 
-- the tutorial creation page will look like the tutorial browser page but with only a right side bar that will have a publish button in it ath the bottom(the left side will be removed to have more space for creating the project)
-- abive the button there will be simple instructions as to how to use the tutorial creation menu.
--the get back to tutorial browser button will be at the very top of the page and will lead back to, well.... the TutorialBrowser.
-
--i will need a way to store all the tutorial a user has made(probably by using his user name which is already stored as information in the tutorial iteself)
-
-- if a user has made at least one tutorial a new filter will apear in the left bar named (see your tutorials) with two options (yes) and (no)
--it will obviously filter only the tutorials made by you
-
--the user that created the tutorial will get additional options while checking it out(clicking the check out button) edit and delete
-
--edit and delete are self explanetory but delete will ask you like with the logout if you are shure you want to delete it and edit will just bring you back to a copy of the tutorial creation page tha will have a button named complete edit in the right bar intead of puslish as in the regular creation page.
-
--add actual error handling
+-when creating a tutorial the registered user must add a title, a cover image and tutorial description.
+-after that they will need to fill out at least one step.
+-a step contains a title, an optional iamge and main text/description of the step
+-more steps can be added by the user by using the ADDSTEPS button
+-additionaly the user must specify the type of tutorial they are making and for what platform.
+-the new steps have the exact same structure
+-the created tutorial keeps information as the tutorial cerator, ctaegory and platform of the tutorial.
+-only the creator can edid or delete the tutorial.
 
 
 
 
-//bonus
-
--in the home page add a section that will have all users listed with the number of tutorials they have made
-
--filter with options to filter the user by name, by specific text entered and by number of tutorials made will also be a nice addition
-
--add a like/rating system for the tutorials
 
 
 

@@ -50,6 +50,7 @@ export default function TutorialEditPage() {
     const [coverImage, setCoverImage] = useState(null);
     const [steps, setSteps] = useState([{ title: "", description: "", image: null }]);
 
+    //load the existing data, if it exists
     useEffect(() => {
         const stored = JSON.parse(localStorage.getItem("tutorials")) || [];
         const found = stored.find(t => String(t.id) === id);
@@ -67,6 +68,8 @@ export default function TutorialEditPage() {
         setSteps(found.steps);
     }, [id]);
 
+
+    //update step
     const updateStep = (index, field, value) => {
         setSteps(prev => {
             const updated = [...prev];
@@ -75,9 +78,12 @@ export default function TutorialEditPage() {
         });
     };
 
+    //add step
     const addStep = () =>
         setSteps(prev => [...prev, { title: "", description: "", image: null }]);
 
+
+     //save changes
     const saveChanges = () => {
         if (!title.trim()) return alert("Tutorial title is required.");
         if (!coverImage) return alert("Please add a cover image.");
