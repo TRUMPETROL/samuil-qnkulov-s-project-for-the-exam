@@ -1,0 +1,100 @@
+.cv-comments-page {
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #1d1c1d;
+    border-radius: 25px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+.cv-title {
+    color: #fff;
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.cv-comment-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 40px 0;
+}
+
+.cv-comment-card {
+    background-color: #2a292a;
+    border-radius: 15px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    color: #fff;
+    font-size: 18px;
+    transition: background 0.2s;
+}
+
+.cv-comment-card:hover {
+    background-color: #3a383a;
+}
+
+.cv-comment-author {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.cv-comment-date {
+    font-weight: 300;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.cv-comment-message {
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.cv-no-comments {
+    text-align: center;
+    color: #ccc;
+    font-style: italic;
+}
+
+.cv-back-btn, .cv-add-btn {
+    display: inline-block;
+    margin-bottom: 25px;
+    padding: 12px 25px;
+    border-radius: 25px;
+    background-color: #470e0e;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cv-back-btn:hover, .cv-add-btn:hover {
+    background-color: #ac3535;
+    transform: translateY(-2px);
+}
+
+.cv-delete-btn {
+    margin-top: 10px;
+    padding: 10px 20px;        
+    background-color: #770b0b;
+    color: #fff;
+    border: none;
+    border-radius: 25px;       
+    font-size: 16px;           
+    font-weight: 600;         
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cv-delete-btn:hover {
+    background-color: #b82e2e;
+    transform: translateY(-2px);  
+}
+
+@media (max-width: 900px) {
+    .cv-comments-page {
+        padding: 20px 10px;
+    }
+}

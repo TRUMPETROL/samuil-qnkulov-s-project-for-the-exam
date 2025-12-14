@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "/public/css/tutorialcreate.css";
 import UserContext from "../../contexts/UserContext";
-
+import useRequest from "../../hooks/useRequest";
 
 async function compressImage(file, maxWidth = 800, maxHeight = 600, quality = 0.6) {
     return new Promise((resolve) => {
@@ -43,6 +43,7 @@ export default function TutorialEditPage() {
     const { id } = useParams();
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
+    const { request } = useRequest();
 
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("Modeling");
@@ -50,26 +51,24 @@ export default function TutorialEditPage() {
     const [coverImage, setCoverImage] = useState(null);
     const [steps, setSteps] = useState([{ title: "", description: "", image: null }]);
 
-    //load the existing data, if it exists
+    
     useEffect(() => {
-        const stored = JSON.parse(localStorage.getItem("tutorials")) || [];
-        const found = stored.find(t => String(t.id) === id);
-
-        if (!found) {
-            alert("Tutorial not found.");
-            return navigate("/tutorials");
+        async function loadTutorial() {
+            try {
+                const data = await request(`/data/tutorials/${id}`);
+                setTitle(data.title);
+                setCategory(data.category);
+                setPlatform(data.platform);
+                setCoverImage(data.coverImage || null);
+                setSteps(data.steps.length ? data.steps : [{ title: "", description: "", image: null }]);
+            } catch (err) {
+                alert("Tutorial not found.");
+                navigate("/tutorials");
+            }
         }
-
-       
-        setTitle(found.title);
-        setCategory(found.category);
-        setPlatform(found.platform);
-        setCoverImage(found.coverImage);
-        setSteps(found.steps);
+        loadTutorial();
     }, [id]);
 
-
-    //update step
     const updateStep = (index, field, value) => {
         setSteps(prev => {
             const updated = [...prev];
@@ -78,15 +77,10 @@ export default function TutorialEditPage() {
         });
     };
 
-    //add step
-    const addStep = () =>
-        setSteps(prev => [...prev, { title: "", description: "", image: null }]);
+    const addStep = () => setSteps(prev => [...prev, { title: "", description: "", image: null }]);
 
-
-     //save changes
-    const saveChanges = () => {
+    const saveChanges = async () => {
         if (!title.trim()) return alert("Tutorial title is required.");
-        if (!coverImage) return alert("Please add a cover image.");
         if (!steps.length) return alert("Add at least one step.");
 
         for (let i = 0; i < steps.length; i++) {
@@ -94,23 +88,28 @@ export default function TutorialEditPage() {
             if (!steps[i].description.trim()) return alert(`Step ${i + 1} needs a description.`);
         }
 
-        const existingTutorials = JSON.parse(localStorage.getItem("tutorials")) || [];
-        const index = existingTutorials.findIndex(t => String(t.id) === id);
-
-        if (index === -1) return alert("cannot save changes.");
-
-        existingTutorials[index] = {
-            ...existingTutorials[index],
+       const updatedTutorial = {
             title,
             category,
             platform,
             coverImage,
-            steps,
+            steps: steps.map(s => ({
+                title: s.title,
+                description: s.description,
+                image: s.image || ""
+            })),
+            _ownerId: user._id,
+            creator: user.email,
+            createdAt: new Date().toISOString()
         };
 
-        localStorage.setItem("tutorials", JSON.stringify(existingTutorials));
-        alert("Tutorial updated successfully!");
-        navigate(`/tutorial/${id}`);
+        try {
+            await request(`/data/tutorials/${id}`, "PUT", updatedTutorial);
+            alert("Tutorial updated successfully!");
+            navigate(`/tutorial/${id}`);
+        } catch (err) {
+            alert(err.message);
+        }
     };
 
     return (
@@ -137,10 +136,12 @@ export default function TutorialEditPage() {
 
                         <h3>Cover Image</h3>
 
-                        <img
-                            src={coverImage}
-                            style={{ width: "200px", marginBottom: "10px", borderRadius: "10px" }}
-                        />
+                        {coverImage && (
+                            <img
+                                src={coverImage}
+                                style={{ width: "200px", marginBottom: "10px", borderRadius: "10px" }}
+                            />
+                        )}
 
                         <input
                             type="file"

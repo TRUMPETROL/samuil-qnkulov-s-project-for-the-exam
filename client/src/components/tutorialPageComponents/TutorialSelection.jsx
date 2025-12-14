@@ -1,16 +1,6 @@
-import { useEffect, useState } from "react";
 import Tutorial from "./Tutorial.jsx";
 
-//useEffect has been added to get data on the spot in order to fix a bug where on refresh the pre-selected category would update before the tutorial got loaded so you would get no results from the pre-selected category untill manually selecting it 
-
-export default function TutorialSelection({ selectedCategory, selectedPlatform, searchTerm }) {
-    const [tutorials, setTutorials] = useState([]);
-
-    useEffect(() => {
-        const stored = JSON.parse(localStorage.getItem("tutorials")) || [];
-        setTutorials(stored);
-    }, []); 
-
+export default function TutorialSelection({ selectedCategory, selectedPlatform, searchTerm, tutorials }) {
     const filtered = tutorials.filter(t =>
         (selectedCategory === "All" || t.category === selectedCategory) &&
         (selectedPlatform === "All" || t.platform === selectedPlatform) &&
@@ -20,12 +10,12 @@ export default function TutorialSelection({ selectedCategory, selectedPlatform, 
     return (
         <div className="tutorial-main-menu">
             <div className="tutorial-browser">
-                {filtered.map((tut, index) => (
+                {filtered.map((tut) => (
                     <Tutorial
-                        key={index}
+                        key={tut._id || tut.id}
                         title={tut.title}
                         image={tut.coverImage}
-                        link={`/tutorial/${tut.id}`}
+                        link={`/tutorial/${tut._id || tut.id}`}
                     />
                 ))}
             </div>

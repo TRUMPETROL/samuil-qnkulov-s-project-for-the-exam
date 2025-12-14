@@ -4,10 +4,9 @@ export default function Tutorial({
   title, 
   image, 
   link, 
-  onClick
 }) {
   return (
-    <div className="tutorial-card" onClick={onClick}>
+    <div className="tutorial-card" >
       <div className="image-wrapper">
         <img src={image} alt={title} />
       </div>

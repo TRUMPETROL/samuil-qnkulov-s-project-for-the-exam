@@ -11,6 +11,8 @@ import ProfilePage from "./components/ProfilePage.jsx";
 import PrivateRoute from "./PrivateRoute.jsx";
 import TutorialView from "./components/TutorialView.jsx";
 import TutorialEditPage from "./components/tutorialPageComponents/TutorialEditPage.jsx";
+import CommentView from "./components/tutorialPageComponents/CommentView.jsx";
+import CreateComment from "./components/tutorialPageComponents/CreateComment.jsx";
 
 
 
@@ -102,6 +104,26 @@ function App() {
         element={
           <PrivateRoute>
             <TutorialEditPage />
+          </PrivateRoute>
+        }
+      />
+
+
+      <Route
+        path="/tutorial/:id/comments"
+        element={
+          <PrivateRoute>
+            <CommentView /> 
+          </PrivateRoute>
+        }
+      />
+
+
+      <Route
+        path="/tutorial/:id/comments/create"
+        element={
+          <PrivateRoute>
+            <CreateComment />
           </PrivateRoute>
         }
       />

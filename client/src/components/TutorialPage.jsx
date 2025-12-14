@@ -1,20 +1,35 @@
 import { useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import RegistrationBar from "./RegistrationBar.jsx";
 import BackHomeButton from "./tutorialPageComponents/BackHomeButton.jsx";
 import LeftBar from "./tutorialPageComponents/LeftBar.jsx";
 import RightBar from "./tutorialPageComponents/RightBar.jsx";
 import TutorialFooter from "./tutorialPageComponents/TutorialPFooter.jsx";
-import "/public/css/tutorials.css"
+import "/public/css/tutorials.css";
 import TutorialSelection from "./tutorialPageComponents/TutorialSelection.jsx";
+import useRequest from "../hooks/useRequest";
 
 export default function TutorialsPage() {
     const location = useLocation();
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [selectedPlatform, setSelectedPlatform] = useState("All");
-    
-   
     const [searchTerm, setSearchTerm] = useState("");
+    const [tutorials, setTutorials] = useState([]);
+
+    const { request } = useRequest();
+
+    const fetchTutorials = useCallback(async () => {
+        try {
+            const data = await request("/data/tutorials", "GET");
+            setTutorials(data);
+        } catch (err) {
+            alert(err.message);
+        }
+    }, [request]);
+
+    useEffect(() => {
+        fetchTutorials();
+    }, [fetchTutorials]);
 
     useEffect(() => {
         const params = new URLSearchParams(location.search);
@@ -52,7 +67,8 @@ export default function TutorialsPage() {
                 <TutorialSelection
                     selectedCategory={selectedCategory}
                     selectedPlatform={selectedPlatform}
-                    searchTerm={searchTerm}          
+                    searchTerm={searchTerm}  
+                    tutorials={tutorials} 
                 />
                 <RightBar />
             </div>

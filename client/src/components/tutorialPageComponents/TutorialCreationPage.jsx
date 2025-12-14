@@ -1,10 +1,11 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "/public/css/tutorialcreate.css";
 import UserContext from "../../contexts/UserContext";
+import useRequest from "../../hooks/useRequest";
 
-//shamelessly stolen code that compresses images so that they take up less space 
 
+//technically not needed but prevents users from uploadimg images with ridicilous file sizes
 async function compressImage(file, maxWidth = 800, maxHeight = 600, quality = 0.6) {
     return new Promise((resolve) => {
         const reader = new FileReader();
@@ -17,7 +18,6 @@ async function compressImage(file, maxWidth = 800, maxHeight = 600, quality = 0.
             img.onload = () => {
                 let { width, height } = img;
 
-               
                 if (width > maxWidth) {
                     height *= maxWidth / width;
                     width = maxWidth;
@@ -41,11 +41,10 @@ async function compressImage(file, maxWidth = 800, maxHeight = 600, quality = 0.
     });
 }
 
-
-
 export default function TutorialCreationPage() {
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
+    const { request } = useRequest();
 
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("Modeling");
@@ -54,10 +53,9 @@ export default function TutorialCreationPage() {
     const [steps, setSteps] = useState([{ title: "", description: "", image: null }]);
 
 
-    //add a step object
     const addStep = () => setSteps(prev => [...prev, { title: "", description: "", image: null }]);
 
-    //update the step object
+
     const updateStep = (index, field, value) => {
         setSteps(prev => {
             const updated = [...prev];
@@ -67,33 +65,41 @@ export default function TutorialCreationPage() {
     };
 
 
-    //save the tutorial to the LocalStorage while checking for the basic requirements(missing title...) along the way
-    const publishTutorial = () => {
+    const publishTutorial = async () => {
         if (!title.trim()) return alert("Tutorial title is needed.");
         if (!coverImage) return alert("Please add a cover image for your tutorial.");
         if (!steps.length) return alert("Add at least one step.");
+
         for (let i = 0; i < steps.length; i++) {
             if (!steps[i].title.trim()) return alert(`Step ${i + 1} needs a title.`);
             if (!steps[i].description.trim()) return alert(`Step ${i + 1} needs a description.`);
         }
 
         const newTutorial = {
-            id: Date.now(),
             title,
             category,
             platform,
             coverImage,
-            steps,
-            creator: user?.email || "unidentified user?",
-            date: new Date().toISOString()
+            steps: steps.map(s => ({
+                //map() has been added because the softuni server doesnt play well with null for the images and sometimes didnt seem to save the step title and description
+                //now it ensures that every step has the exact structure needed and it shouldnt break or give 400 error.
+                title: s.title,
+                description: s.description,
+                image: s.image || ""
+            })),
+            _ownerId: user._id,
+            creator: user.email,
+            createdAt: new Date().toISOString()
         };
 
-        const existingTutorials = JSON.parse(localStorage.getItem("tutorials")) || [];
-        localStorage.setItem("tutorials", JSON.stringify([...existingTutorials, newTutorial]));
-
-        localStorage.removeItem("tutorialDraft");
-        alert("Tutorial published successfully!");
-        navigate("/tutorials");
+        //now when published the tutorial gets send to the server in a collection called tutorials instead of to local storage
+        try {
+            await request("/data/tutorials", "POST", newTutorial, { accessToken: user.accessToken });
+            alert("Tutorial published successfully!");
+            navigate("/tutorials");
+        } catch (err) {
+            alert(err.message || "Failed to publish tutorial.");
+        }
     };
 
     return (
@@ -155,7 +161,7 @@ export default function TutorialCreationPage() {
                                     onChange={(e) => updateStep(index, "title", e.target.value)}
                                 />
 
-                               <input
+                                <input
                                     type="file"
                                     accept="image/*"
                                     className="tutorial-creation-page__step-image"
@@ -192,10 +198,6 @@ export default function TutorialCreationPage() {
                         <li>Select category and platform.</li>
                         <li>Add steps and optional images.</li>
                         <li>Press Publish to save.</li>
-                        <li>As of now,
-                            because everything is saved on the local storage,
-                            you cant upload too many tutorials.</li>
-
                     </ol>
                 </div>
 

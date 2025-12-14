@@ -1,72 +1,60 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import "/public/css/TutorialView.css";
 import UserContext from "../contexts/UserContext";
- 
+import useRequest from "../hooks/useRequest";
 
 export default function TutorialView() {
-    const { id } = useParams(); 
+    const { id } = useParams();
     const navigate = useNavigate();
     const [tutorial, setTutorial] = useState(null);
-
-
-    const { user } = useContext(UserContext);   
-
+    const { user } = useContext(UserContext);
+    const { request } = useRequest();
 
     useEffect(() => {
-        const stored = JSON.parse(localStorage.getItem("tutorials")) || [];
-        const found = stored.find(t => String(t.id) === id);
-        if (!found) {
-            setTutorial(null);
-        } else {
-            setTutorial(found);
+        async function fetchTutorial() {
+            try {
+                const result = await request(`/data/tutorials/${id}`, "GET");
+                setTutorial(result);
+            } catch (err) {
+                alert("Tutorial not found or failed to load.");
+                navigate("/tutorials");
+            }
         }
-    }, [id]);
+        fetchTutorial();
+    }, [id, request, navigate]);
 
-
-
-
-    //THE DELETE BUTTON WITH FUNCTIONALITY DIRECTLY INSIDE THE PAGE
-
-    const deleteTutorial = () => {
-        if (!confirm("Are you shure you want to delete the tutorial?")) return;
-
-        const stored = JSON.parse(localStorage.getItem("tutorials")) || [];
-        const filtered = stored.filter(t => String(t.id) !== id);
-        localStorage.setItem("tutorials", JSON.stringify(filtered));
-
-        alert("Tutorial deleted.");
-        navigate("/tutorials");
+    // delete btn
+    const deleteTutorial = async () => {
+        if (!confirm("Are you sure you want to delete the tutorial?")) return;
+        try {
+            await request(`/data/tutorials/${id}`, "DELETE", null, { accessToken: user?.accessToken });
+            alert("Tutorial deleted.");
+            navigate("/tutorials");
+        } catch (err) {
+            alert("Failed to delete tutorial: " + err.message);
+        }
     };
 
-
-    // EDIT BUTTON
+    // edit btn
     const editTutorial = () => {
         navigate(`/tutorials/edit/${id}`);
     };
 
-
-
-
     if (!tutorial) {
         return (
             <div>
-                <h2>Tutorial not found.</h2>
-                <button onClick={() => navigate("/tutorials")}>Back to Tutorials</button>
+                <h2>Loading tutorial...</h2>
             </div>
         );
     }
 
-
-    const isCreator = user?.email === tutorial.creator;   
-
+    const isCreator = user?._id === tutorial._ownerId;
 
     return (
         <div className="tutorial-view">
-
             <div className="tutorial-view-top">
-                <button onClick={() => navigate("/tutorials")}>Back to Tutorials</button>
-                
+                <button onClick={() => navigate("/tutorials")}>&larr; Back to Tutorials</button>
                 {isCreator && (
                     <div className="owner-controls">
                         <button className="edit-btn" onClick={editTutorial}>Edit</button>
@@ -74,7 +62,6 @@ export default function TutorialView() {
                     </div>
                 )}
             </div>
-
 
             <h1>{tutorial.title}</h1>
 
@@ -84,9 +71,13 @@ export default function TutorialView() {
                 <span>Creator: {tutorial.creator}</span>
             </div>
 
-            <div className="tutorial-cover">
-                <img src={tutorial.coverImage} alt={tutorial.title} />
-            </div>
+
+            {tutorial.coverImage && (
+                <div className="tutorial-cover">
+                    <img src={tutorial.coverImage} alt={tutorial.title} />
+                </div>
+            )}
+
 
             {tutorial.steps.map((step, index) => (
                 <div className="tutorial-step" key={index}>
@@ -95,6 +86,15 @@ export default function TutorialView() {
                     <p>{step.description}</p>
                 </div>
             ))}
+
+
+            <div className="tutorial-comments-btn">
+                <Link to={`/tutorial/${tutorial._id}/comments`}>
+                    <button>View Comments</button>
+                </Link>
+            </div>
+
+
         </div>
     );
 }

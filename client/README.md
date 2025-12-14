@@ -22,6 +22,11 @@
 -only the creator can edid or delete the tutorial.
 
 
+-each tutorial has its own comment section acessable only by registered users
+-registered users can upload their own comments and read the comments of other users
+-they have the option to delete their own comments but cant delete those of other users
+
+
 
 
 
