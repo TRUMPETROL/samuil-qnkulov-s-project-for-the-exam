@@ -18,12 +18,17 @@ export default function TutorialsPage() {
 
     const { request } = useRequest();
 
+    //note
+    //the tutorials are fetched through the page itself, not the component TutorialSelection
     const fetchTutorials = useCallback(async () => {
         try {
             const data = await request("/data/tutorials", "GET");
-            setTutorials(data);
+            setTutorials(Array.isArray(data) ? data : []);
         } catch (err) {
-            alert(err.message);
+            // the annoying popup 'Resource not found' will no longer be annoying
+            //those are not crashes or serious issues. they just inform the developer that some stuff doesnt exist yet.
+            console.error("Failed to fetch tutorials or tutorials dont exist yet:", err);
+            setTutorials([]); 
         }
     }, [request]);
 
@@ -31,6 +36,7 @@ export default function TutorialsPage() {
         fetchTutorials();
     }, [fetchTutorials]);
 
+    //this is used to get the querry url and use its info do display the apropriate default category
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const category = params.get("category");

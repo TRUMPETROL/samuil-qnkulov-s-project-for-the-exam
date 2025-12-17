@@ -7,17 +7,22 @@ export default function TutorialSelection({ selectedCategory, selectedPlatform, 
         t.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-    return (
+     return (
         <div className="tutorial-main-menu">
             <div className="tutorial-browser">
-                {filtered.map((tut) => (
-                    <Tutorial
-                        key={tut._id || tut.id}
-                        title={tut.title}
-                        image={tut.coverImage}
-                        link={`/tutorial/${tut._id || tut.id}`}
-                    />
-                ))}
+                {filtered.length === 0 ? (
+                    //its better to have an indication that there are no tutorials than just not saying anything
+                    <p className="no-tutorials">No tutorials found.</p>
+                ) : (
+                    filtered.map((tut) => (
+                        <Tutorial
+                            key={tut._id || tut.id}
+                            title={tut.title}
+                            image={tut.coverImage}
+                            link={`/tutorial/${tut._id || tut.id}`}
+                        />
+                    ))
+                )}
             </div>
         </div>
     );

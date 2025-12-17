@@ -251,3 +251,16 @@ body {
     transform: translateY(-2px);
 }
 
+.no-tutorials{
+   width: 100%;
+    display: flex;
+    justify-content: center;
+     margin-top: 10px;
+    margin-bottom: 30px;
+     position: fixed;
+    font-size: 30px;
+    top: 400px;
+    left: 13px;  
+    z-index: 1500;
+}
+
